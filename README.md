@@ -1,7 +1,7 @@
 # Very short description of the package
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/youngmayor/laravel-web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/laravel-web-service)
-[![Total Downloads](https://img.shields.io/packagist/dt/youngmayor/laravel-web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/laravel-web-service)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/youngmayor/web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/web-service)
+[![Total Downloads](https://img.shields.io/packagist/dt/youngmayor/web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/web-service)
 ![GitHub Actions](https://github.com/youngmayor/laravel-web-service/actions/workflows/main.yml/badge.svg)
 
 A laravel package built as a wrapper around Guzzle for connections to external services/APIs
