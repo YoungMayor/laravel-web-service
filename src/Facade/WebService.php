@@ -1,13 +1,13 @@
 <?php
 
-namespace YoungMayor\LaravelWebService\Facade;
+namespace YoungMayor\WebService\Facade;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
  * @see \YoungMayor\LaravelWebService\Skeleton\SkeletonClass
  */
-class LaravelWebService extends Facade
+class WebService extends Facade
 {
     /**
      * Get the registered name of the component.
@@ -16,6 +16,6 @@ class LaravelWebService extends Facade
      */
     protected static function getFacadeAccessor()
     {
-        return 'laravel-web-service';
+        return 'web-service';
     }
 }

@@ -1,10 +1,10 @@
 <?php
 
-namespace YoungMayor\LaravelWebService;
+namespace YoungMayor\WebService;
 
 use Illuminate\Support\ServiceProvider;
 
-class LaravelWebServiceServiceProvider extends ServiceProvider
+class WebServiceServiceProvider extends ServiceProvider
 {
     /**
      * Bootstrap the application services.
@@ -21,7 +21,7 @@ class LaravelWebServiceServiceProvider extends ServiceProvider
 
         if ($this->app->runningInConsole()) {
             $this->publishes([
-                __DIR__.'/../config/config.php' => config_path('laravel-web-service.php'),
+                __DIR__ . '/../config/config.php' => config_path('web-service.php'),
             ], 'config');
 
             // Publishing the views.
@@ -50,11 +50,11 @@ class LaravelWebServiceServiceProvider extends ServiceProvider
     public function register()
     {
         // Automatically apply the package configuration
-        $this->mergeConfigFrom(__DIR__.'/../config/config.php', 'laravel-web-service');
+        $this->mergeConfigFrom(__DIR__ . '/../config/config.php', 'web-service');
 
         // Register the main class to use with the facade
-        $this->app->singleton('laravel-web-service', function () {
-            return new LaravelWebService;
+        $this->app->singleton('web-service', function () {
+            return new WebService;
         });
     }
 }

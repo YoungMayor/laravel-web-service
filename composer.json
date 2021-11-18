@@ -1,9 +1,9 @@
 {
-    "name": "youngmayor/laravel-web-service",
+    "name": "youngmayor/web-service",
     "description": "A laravel package for connecting to external services",
     "keywords": [
         "youngmayor",
-        "laravel-web-service"
+        "web-service"
     ],
     "homepage": "https://github.com/youngmayor/laravel-web-service",
     "license": "MIT",
@@ -23,12 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "YoungMayor\\LaravelWebService\\": "src"
+            "YoungMayor\\WebService\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "YoungMayor\\LaravelWebService\\Tests\\": "tests"
+            "YoungMayor\\WebService\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -41,10 +41,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "YoungMayor\\LaravelWebService\\LaravelWebServiceServiceProvider"
+                "YoungMayor\\WebService\\WebServiceServiceProvider"
             ],
             "aliases": {
-                "LaravelWebService": "YoungMayor\\LaravelWebService\\Facade\\LaravelWebService"
+                "WebService": "YoungMayor\\WebService\\Facade\\WebService"
             }
         }
     }
