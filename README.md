@@ -1,4 +1,4 @@
-# Very short description of the package
+# Laravel Web Service
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/youngmayor/web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/web-service)
 [![Total Downloads](https://img.shields.io/packagist/dt/youngmayor/web-service.svg?style=flat-square)](https://packagist.org/packages/youngmayor/web-service)
