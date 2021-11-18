@@ -8,13 +8,11 @@
     "homepage": "https://github.com/youngmayor/laravel-web-service",
     "license": "MIT",
     "type": "library",
-    "authors": [
-        {
-            "name": "Meyoron Aghogho",
-            "email": "youngmayor.dev@gmail.com",
-            "role": "Developer"
-        }
-    ],
+    "authors": [{
+        "name": "Meyoron Aghogho",
+        "email": "youngmayor.dev@gmail.com",
+        "role": "Developer"
+    }],
     "require": {
         "php": "^7.4|^8.0",
         "illuminate/support": "^8.0"
@@ -36,7 +34,6 @@
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
-
     },
     "config": {
         "sort-packages": true
@@ -47,7 +44,7 @@
                 "YoungMayor\\LaravelWebService\\LaravelWebServiceServiceProvider"
             ],
             "aliases": {
-                "LaravelWebService": "YoungMayor\\LaravelWebService\\LaravelWebServiceFacade"
+                "LaravelWebService": "YoungMayor\\LaravelWebService\\Facade\\LaravelWebService"
             }
         }
     }
