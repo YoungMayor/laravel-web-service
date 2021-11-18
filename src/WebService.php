@@ -4,5 +4,8 @@ namespace YoungMayor\WebService;
 
 class WebService
 {
-    // Build your next great package.
+    public function sayHello($name = "Chief")
+    {
+        return "Hello $name";
+    }
 }
