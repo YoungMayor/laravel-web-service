@@ -3,7 +3,18 @@
     "description": "A laravel package for connecting to external services",
     "keywords": [
         "youngmayor",
-        "web-service"
+        "web-service",
+        "php",
+        "github",
+        "laravel",
+        "laravel 6",
+        "laravel 7",
+        "laravel 8",
+        "Web Service",
+        "Service",
+        "Guzzle",
+        "Wrapper",
+        "API"
     ],
     "homepage": "https://github.com/youngmayor/laravel-web-service",
     "license": "MIT",
@@ -14,8 +25,8 @@
         "role": "Developer"
     }],
     "require": {
-        "php": "^7.4|^8.0",
-        "illuminate/support": "^8.0",
+        "php": "^7.2|^8.0",
+        "illuminate/support": "~6|~7|~8",
         "guzzlehttp/guzzle": "~6|~7|~8"
     },
     "require-dev": {
@@ -32,6 +43,7 @@
             "YoungMayor\\WebService\\Tests\\": "tests"
         }
     },
+    "minimum-stability": "stable",
     "scripts": {
         "test": "vendor/bin/phpunit",
         "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
