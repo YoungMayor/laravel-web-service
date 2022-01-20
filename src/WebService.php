@@ -6,6 +6,19 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use InvalidArgumentException;
 
+/**
+ * Abstract WebService
+ * 
+ * @method string baseUri() Setup the base URI for all requests
+ * @method array clientConfig() Setup the configurations to be sent with every request
+ * @method null setHeaders(array $headers) Add headers to the list of headers sent with request. Call this before the request
+ * 
+ * @method \YoungMayor\WebService\ServiceResponse get(string $uri, array $options) Send a GET request to $uri with $options 
+ * @method \YoungMayor\WebService\ServiceResponse post(string $uri, array $options) Send a POST request to $uri with $options
+ * @method \YoungMayor\WebService\ServiceResponse put(string $uri, array $options) Send a PUT request to $uri with $options
+ * @method \YoungMayor\WebService\ServiceResponse delete(string $uri, array $options) Send a DELETE request to $uri with $options
+ * @method \YoungMayor\WebService\ServiceResponse patch(string $uri, array $options) Send a PATCH request to $uri with $options
+ */
 abstract class WebService
 {
     protected $response;
@@ -14,25 +27,26 @@ abstract class WebService
 
     protected $headers = [];
 
-    public $response_status = 0;
-
     protected $timeout = 60;
 
+    /**
+     * Set the base URI for the request
+     *
+     * @return string
+     */
     abstract protected function baseUri();
 
     public function __construct()
     {
-        $this->client = new Client(array_merge(
-            [
-                'base_uri' => $this->baseUri(),
-            ],
-            $this->clientConfig()
-        ));
+        $this->client = new Client(array_merge([
+            'base_uri' => $this->baseUri(),
+        ], $this->clientConfig()));
     }
 
-    public function makeRequest(string $method, string $uri, array $options = [])
+    private function makeRequest(string $method, string $uri, array $options = [])
     {
         $this->checkValidRequestMethod($method);
+
         if (!empty($this->headers)) {
             $options['headers'] = (!empty($options['headers']))
                 ? array_merge($this->headers, $options['headers'])
@@ -40,27 +54,33 @@ abstract class WebService
         }
 
         try {
-            $this->response = $this->client->request(strtoupper($method), $uri, $options);
-            return $this->renderResponse();
+            $response = $this->client->request(strtoupper($method), $uri, $options);
+
+            return new ServiceResponse($response);
         } catch (RequestException $e) {
-            return $this->renderExceptionResponse($e);
+            return new ServiceResponse(null, $e);
         }
     }
 
-    protected function checkValidRequestMethod($method)
+    private function checkValidRequestMethod($method)
     {
         if (!$this->isValidRequestMethod($method)) {
             throw new InvalidArgumentException("{$method} is not a valid request type");
         }
     }
 
-    protected function isValidRequestMethod($method)
+    private function isValidRequestMethod($method)
     {
         $valid_methods = ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'];
 
         return in_array(strtoupper($method), $valid_methods);
     }
 
+    /**
+     * Set the client's configuration sent with the request 
+     *
+     * @return void
+     */
     protected function clientConfig()
     {
         return ['timeout' => $this->timeout];
@@ -71,39 +91,14 @@ abstract class WebService
         $this->headers = array_merge($this->headers, $headers);
     }
 
-    protected function renderResponse()
-    {
-        $this->response_status = $this->response->getStatusCode();
-
-        return [
-            'status' => $this->response_status,
-            'data' => json_decode($this->response->getBody()->getContents(), true),
-        ];
-    }
-
-    public function renderExceptionResponse($exception)
-    {
-        $this->response = $exception->hasResponse() ? $exception->getResponse() : null;
-
-        $this->response_status = $this->response ? $this->response->getStatusCode() : $exception->getCode();
-
-        return [
-            'status' => $this->response_status,
-            'message' => $exception->getMessage(),
-            'error' => $this->response ? json_decode($this->response->getBody()->getContents(), true) : $exception->getMessage(),
-        ];
-    }
-
-    public function getClient()
-    {
-        return $this->client;
-    }
-
-    public function getResponse()
-    {
-        return $this->response;
-    }
-
+    /**
+     * Handle the request with the appropriate verb
+     *
+     * @param string $method
+     * @param mixed $arguments
+     * 
+     * @return \YoungMayor\WebService\ServiceResponse
+     */
     public function __call($method, $arguments)
     {
         $this->checkValidRequestMethod($method);
